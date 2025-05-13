@@ -1,0 +1,86 @@
+﻿#############
+# .NET Stuff
+#############
+
+# Build output
+bin/
+obj/
+*.user
+*.suo
+
+# Publish output
+*.publish.xml
+
+# Configuration files
+appsettings.*.json
+
+# Database files
+*.db
+
+# User secrets
+secrets.json
+
+#########################
+# Visual Studio & IDEs
+#########################
+
+.vscode/
+.idea/
+*.sln.docstates
+
+# VS backup files
+*.ncb
+*.sdf
+*.opensdf
+*.cache
+*.dbmdl
+
+#########################
+# ASP.NET Core Static Content
+#########################
+
+# If using wwwroot for built assets
+wwwroot/assets/
+
+# If Webpack outputs to /dist
+dist/
+
+#####################
+# Node & NPM
+#####################
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.pnp.*
+.pnpm-debug.log*
+
+####################
+# Webpack / Frontend
+####################
+
+# Webpack dev server cache
+.cache/
+.postcss-cache/
+.tailwind/
+
+# Source maps (optional)
+*.map
+
+##################
+# Logs / Temp
+##################
+
+*.log
+*.tmp
+*.bak
+
+###################
+# System files
+###################
+
+.DS_Store
+Thumbs.db
+ehthumbs.db
