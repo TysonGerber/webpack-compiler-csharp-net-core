@@ -44,6 +44,7 @@
 // this  injects the CSS into a < style > tag in the browser at runtime, instead of writing a main.min.css file. npm run build But npm run buildprod will extracts the CSS into a physical file:
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 console.log('Building in', isProduction ? 'PRODUCTION' : 'DEVELOPMENT', 'mode');
@@ -76,7 +77,23 @@ module.exports = {
     plugins: [
         ...(isProduction
             ? [new MiniCssExtractPlugin({ filename: 'css/[name].min.css' })]
-            : [])
+            : [
+                new MiniCssExtractPlugin({ filename: 'css/[name].min.css' }),
+                new BrowserSyncPlugin(
+                    {
+                        proxy: 'https://webpackcompiler.local',
+                        files: [
+                            '../Views/**/*.cshtml',
+                            '../wwwroot/css/*.css',
+                            '../wwwroot/js/*.js'
+                        ],
+                        reloadDelay: 500,
+                        https: true,
+                        open: false
+                    },
+                    { reload: true }
+                )
+            ])
     ],
 
     devtool: isProduction ? false : 'source-map',
@@ -88,8 +105,8 @@ module.exports = {
         open: true,
         proxy: [
             {
-                context: ['/'],
-                target: 'https://localhost:44325',
+                context: ['/api'],
+                target: 'https://webpackcompiler.local',
                 secure: false,
                 changeOrigin: true
             }

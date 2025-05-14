@@ -3,4 +3,4 @@
     console.log(`Hello ${name} how are you?`);
 }
 
-greeting("Grrooot");
+greeting("Kingston");

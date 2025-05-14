@@ -10,8 +10,21 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="8.0.14" />
   </ItemGroup>
 
+  <!-- Ensures this folder is tracked -->
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
+
+  <!-- Ensure appsettings.Production.json is copied to the publish directory -->
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <!-- Automatically run Webpack before dotnet publish -->
+<Target Name="RunWebpackBuild" BeforeTargets="Publish">
+  <Exec Command="npm run buildprod" WorkingDirectory="$(ProjectDir)" />
+</Target>
 
 </Project>
