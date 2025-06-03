@@ -1,10 +1,16 @@
 ﻿/** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
-        './src/**/*.{html,js,ts,jsx,tsx,cshtml,scss}' // Adjust based on your file types
+        './Views/**/*.cshtml',
+        './src/**/*.{js,ts,jsx,tsx}',
+    ],
+    safelist: [
+        'bg-green-500',
+        'text-white',
+        'hover:bg-green-600',
     ],
     theme: {
-        extend: {} // Add custom colors, spacing, fonts, etc. here
+        extend: {},
     },
-    plugins: [] // Add Tailwind plugins here (e.g., forms, typography)
+    plugins: [],
 };

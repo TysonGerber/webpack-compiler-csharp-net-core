@@ -1,244 +1,104 @@
-﻿//module.exports = {
-//    module: {
-//        rules: [
-//            {
-//                test: /\.css$/,
-//                use: [
-//                    'style-loader',
-//                    'css-loader',         // Turns CSS into CommonJS
-//                    'postcss-loader'      // Processes with PostCSS (e.g., Tailwind, Autoprefixer)
-//                ]
-//            }
-//        ]
-//    }
-//};
-
-
-// Defaults
-//webpack outputs the bundled files to a dist folder. If no configuration is provided, webpack assumes the entry point of your project is src/index.js and will output the result in dist/main.js. This behavior is configurable through the output property in your webpack configuration file (webpack.config.js).
-
-// You don't need to setup a config if you use these paths:
-
-//JS
-// ./src/index.js
-
-//CSS
-// ./src/style.css
-
-/*(3 loaders needed to compile)*/
-//'css-loader', // Turns CSS into CommonJS
-//'postcss-loader', // Processes with PostCSS (e.g., Tailwind, Autoprefixer)
-// 'sass-loader' // Converts SCSS to CSS
-// style loader is a way to inject inline styles onto the page
-
-
-
-// Tools used
-
-// Packages used:
-
-
-//npx is a way to go get and run the most current version of the package or it will use your local one if you have that setup.
-
-
-// this  injects the CSS into a < style > tag in the browser at runtime, instead of writing a main.min.css file. npm run build But npm run buildprod will extracts the CSS into a physical file:
+﻿const fs = require('fs');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
+const isDevCommand = process.env.npm_lifecycle_event === 'dev';
+
 console.log('Building in', isProduction ? 'PRODUCTION' : 'DEVELOPMENT', 'mode');
+
+// Cert paths for HTTPS
+const keyPath = path.resolve(__dirname, '../certs/webpackcompiler.local.key');
+const certPath = path.resolve(__dirname, '../certs/webpackcompiler.local.crt');
+
+// Validate certs in dev
+if (!isProduction && (!fs.existsSync(keyPath) || !fs.existsSync(certPath))) {
+    throw new Error('❌ Key or Cert file missing.');
+}
+
+if (!isProduction) {
+    console.log('🧪 Dev mode: Visit https://webpackcompiler.local:3000 — DO NOT use https://webpackcompiler.local directly.');
+}
+
+
+// Conditional CSS loader: style-loader for dev, MiniCssExtract for prod
+const cssLoaders = isProduction
+    ? [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+    : ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'];
+
+console.log(`MY css loaders are ${cssLoaders}`);
+
+const lifecycle = process.env.npm_lifecycle_event;
+// Plugins array
+const plugins = [];
+
+if (isProduction) {
+    plugins.push(
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].min.css',
+            ignoreOrder: true
+        })
+    );
+} else {
+    plugins.push(
+        new BrowserSyncPlugin(
+            {
+                proxy: 'https://localhost:7238',
+                host: 'webpackcompiler.local',
+                port: 3000,
+                https: {
+                    key: keyPath,
+                    cert: certPath
+                },
+                startPath: '/',
+                open: isProduction ? false : 'external',
+/*                open: 'external',*/
+                files: [
+                    path.resolve(__dirname, '../Views/**/*.cshtml'),
+                    path.resolve(__dirname, '../wwwroot/js/**/*.js'),
+                    path.resolve(__dirname, '../wwwroot/css/**/*.css')
+                ],
+                reloadDelay: 500
+            },
+            {
+                injectCss: true,
+                reload: false,
+                callbacks: {
+                    ready: function (err, bs) {
+                        console.log('✅ BrowserSync is watching for .cshtml changes...');
+                        bs.watch('../Views/**/*.cshtml').on('change', (file) => {
+                            console.log(`🔁 .cshtml file changed: ${file}`);
+                            bs.reload();
+                        });
+                    }
+                }
+            }
+        )
+    );
+}
+const outputPath = isProduction
+    ? path.resolve(__dirname, '../../bin/Release/net8.0/publish/wwwroot')
+    : path.resolve(__dirname, '../wwwroot');
 
 module.exports = {
     mode: isProduction ? 'production' : 'development',
-
     entry: path.resolve(__dirname, '../src/main.js'),
-
     output: {
         filename: 'js/[name].min.js',
-        path: path.resolve(__dirname, '../wwwroot'),
+
+        path: outputPath,
+        publicPath: '/',
         clean: true
     },
-
+    devtool: isProduction ? false : 'source-map',
     module: {
         rules: [
             {
                 test: /\.scss$/,
-                use: [
-                    isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-                    'css-loader',
-                    'postcss-loader', // must come before sass-loader
-                    'sass-loader'
-                ]
+                use: cssLoaders
             }
         ]
     },
-
-    plugins: [
-        ...(isProduction
-            ? [new MiniCssExtractPlugin({ filename: 'css/[name].min.css' })]
-            : [
-                new MiniCssExtractPlugin({ filename: 'css/[name].min.css' }),
-                new BrowserSyncPlugin(
-                    {
-                        proxy: 'https://webpackcompiler.local',
-                        files: [
-                            '../Views/**/*.cshtml',
-                            '../wwwroot/css/*.css',
-                            '../wwwroot/js/*.js'
-                        ],
-                        reloadDelay: 500,
-                        https: true,
-                        open: false
-                    },
-                    { reload: true }
-                )
-            ])
-    ],
-
-    devtool: isProduction ? false : 'source-map',
-
-    // ✅ HERE'S WHERE YOUR devServer GOES
-    devServer: {
-        port: 5026,
-        hot: true,
-        open: true,
-        proxy: [
-            {
-                context: ['/api'],
-                target: 'https://webpackcompiler.local',
-                secure: false,
-                changeOrigin: true
-            }
-        ],
-        static: {
-            directory: path.join(__dirname, '../wwwroot'),
-            publicPath: '/'
-        },
-        devMiddleware: {
-            publicPath: '/'
-        }
-    }
+    plugins
 };
-
-// this  injects the CSS into a < style > tag in the browser at runtime, instead of writing a main.min.css file. npm run build But npm run buildprod will extracts the CSS into a physical file:
-////////const path = require('path');
-////////const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-////////const isProduction = process.env.NODE_ENV === 'production';
-////////console.log('Building in', isProduction ? 'PRODUCTION' : 'DEVELOPMENT', 'mode');
-
-////////module.exports = {
-////////    mode: isProduction ? 'production' : 'development',
-
-////////    // Entry point: adjust if using src/styles/index.js
-////////    entry: path.resolve(__dirname, '../src/index.js'),
-
-////////    output: {
-////////        filename: 'js/[name].min.js',
-////////        path: path.resolve(__dirname, '../wwwroot'),
-////////        clean: true, // clean old build files
-////////    },
-
-////////    module: {
-////////        rules: [
-////////            {
-////////                test: /\.scss$/,
-////////                use: [
-////////                     MiniCssExtractPlugin.loader,
-////////                    'css-loader', // Turns CSS into CommonJS
-////////                    'postcss-loader', // Processes with PostCSS (e.g., Tailwind, Autoprefixer)
-////////                    'sass-loader' // Converts SCSS to CSS
-////////                ]
-////////            }
-////////        ]
-////////    },
-
-////////    plugins: [
-////////         new MiniCssExtractPlugin({ filename: 'css/[name].min.css' })
-////////    ],
-
-////////    devtool: isProduction ? false : 'source-map',
-////////};
-
-
-//module.exports = {
-//    entry: {
-//        main: './src/js/main.js', // Your JS entry point
-//        styles: './src/css/main.css' // Tailwind CSS entry
-//    },
-//    output: {
-//        filename: 'js/[name].bundle.js',
-//        path: path.resolve(__dirname, 'wwwroot'), // or Content/Scripts based on preference
-//        clean: true, // clean old files on build
-//    },
-//    module: {
-//        rules: [
-//            // JavaScript and jQuery
-//            {
-//                test: /\.js$/,
-//                exclude: /node_modules/,
-//                use: 'babel-loader'
-//            },
-
-//            // Tailwind and CSS
-//            {
-//                test: /\.css$/,
-//                use: [
-//                    process.env.NODE_ENV !== 'production'
-//                        ? 'style-loader'
-//                        : MiniCssExtractPlugin.loader,
-//                    'css-loader',
-//                    'postcss-loader'
-//                ]
-//            },
-
-//            // Images
-//            {
-//                test: /\.(png|jpe?g|gif|svg)$/i,
-//                type: 'asset/resource',
-//                generator: {
-//                    filename: 'images/[name][hash][ext][query]'
-//                }
-//            },
-
-//            // Webfonts
-//            {
-//                test: /\.(woff2?|eot|ttf|otf)$/,
-//                type: 'asset/resource',
-//                generator: {
-//                    filename: 'fonts/[name][hash][ext][query]'
-//                }
-//            },
-
-//            // CSHTML & HTML (processed only to copy to output if needed)
-//            {
-//                test: /\.(html|cshtml)$/,
-//                use: 'raw-loader', // just imports them as string; no transformation
-//                exclude: /node_modules/
-//            }
-//        ]
-//    },
-//    plugins: [
-//        new MiniCssExtractPlugin({
-//            filename: 'css/[name].css'
-//        }),
-//        new CopyWebpackPlugin({
-//            patterns: [
-//                {
-//                    from: 'src/assets/images',
-//                    to: 'images'
-//                },
-//                {
-//                    from: 'src/assets/fonts',
-//                    to: 'fonts'
-//                }
-//            ]
-//        })
-//    ],
-//    resolve: {
-//        extensions: ['.js']
-//    },
-//    devtool: isProduction ? false : 'source-map',
-//    mode: isProduction ? 'production' : 'development'
-//};

@@ -1,11 +1,20 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    @inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Environment
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Webpack5BoilerPlate</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="@Url.Content("~/css/main.min.css")" />
+   @*  @if (Environment.IsDevelopment())
+    {
+        <!-- Don't include CSS file, it's injected by Webpack -->
+    }
+    else
+    {
+        <link rel="stylesheet" href="@Url.Content("~/css/main.min.css")" />
+    } *@
+    
     @* <link rel="stylesheet" asp-href="~/css/main.min.css" asp-append-version="true" /> *@
 
 </head>

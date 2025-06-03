@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/ProjectEvaluation/webpackfinishedboilerplate.metadata.v9.bin
+/.vs/ProjectEvaluation/webpackfinishedboilerplate.projects.v9.bin
+/.vs/ProjectEvaluation/webpackfinishedboilerplate.strings.v9.bin
+/.vs/webpackFinishedBoilerPlate/FileContentIndex
+/.vs/webpackFinishedBoilerPlate/CopilotIndices/17.13.444.19527
+/.vs/webpackFinishedBoilerPlate/DesignTimeBuild
+/.vs/webpackFinishedBoilerPlate/v17
+/.vs/webpackFinishedBoilerPlate/config/applicationhost.config

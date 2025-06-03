@@ -5,16 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cross-env NODE_ENV=development webpack --config config/webpack.config.js",
-    "devwatch": "cross-env NODE_ENV=development webpack --watch --config config/webpack.config.js",
-    "devbackend": "dotnet watch run",
-    "devall": "concurrently \"npm:watch\" \"npm:devbackend\"",
-    "watch": "webpack serve --config config/webpack.config.js --env development",
-    "buildwatch": "cross-env NODE_ENV=development webpack --watch --config config/webpack.config.js",
-    "buildall": "cross-env NODE_ENV=production webpack --config config/webpack.config.js && dotnet publish -c Release -o ./bin/Release/net8.0/publish",
     "buildprod": "cross-env NODE_ENV=production webpack --config config/webpack.config.js",
-    "publish": "dotnet publish -c Release -o ./bin/Release/net8.0/publish",
-    "dev": "webpack serve --config config/webpack.config.js --env development"
+    "buildwatch": "cross-env NODE_ENV=development webpack --watch --config config/webpack.config.js",
+    "dev": "cross-env NODE_ENV=development npm run start:full",
+    "start:full": "concurrently -n FRONTEND,BACKEND -c green,blue \"npm run buildwatch\" \"dotnet watch run\"",
+    "publish": "npm run buildprod && dotnet publish -c Release",
+    "bsync": "concurrently -n FRONTEND -c green \"npm run buildwatch\""
   },
   "author": "",
   "license": "ISC",
