@@ -18,16 +18,18 @@ if (!isProduction && (!fs.existsSync(keyPath) || !fs.existsSync(certPath))) {
 }
 
 if (!isProduction) {
-    console.log('🧪 Dev mode: Visit https://webpackcompiler.local:3000 — DO NOT use https://webpackcompiler.local directly.');
+    console.log('Dev mode: Visit https://webpackcompiler.local:3000 — DO NOT use https://webpackcompiler.local directly.');
 }
 
 
 // Conditional CSS loader: style-loader for dev, MiniCssExtract for prod
 const cssLoaders = isProduction
-    ? [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
-    : ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'];
+    ? [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
+    : ['style-loader', 'css-loader', 'postcss-loader'];
 
-console.log(`MY css loaders are ${cssLoaders}`);
+
+console.log('Using loaders:', cssLoaders.map(loader => typeof loader === 'string' ? loader : 'MiniCssExtractPlugin.loader').join(', '));
+
 
 const lifecycle = process.env.npm_lifecycle_event;
 // Plugins array
@@ -95,8 +97,13 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.scss$/,
+                test: /\.css$/,
                 use: cssLoaders
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: 'babel-loader'
             }
         ]
     },

@@ -56,7 +56,7 @@ yarn-error.log*
 package-lock.json
 .pnp.*
 .pnpm-debug.log*
-
+.pnpm-store/
 ####################
 # Webpack / Frontend
 ####################

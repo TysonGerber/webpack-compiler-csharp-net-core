@@ -4,6 +4,5 @@
 }
 
 body {
-    /* @apply bg-green-500;*/
-    background-color: blue;
+    @apply bg-gray-200;
 }

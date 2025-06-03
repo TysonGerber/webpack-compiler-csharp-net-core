@@ -5,12 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "buildprod": "cross-env NODE_ENV=production webpack --config config/webpack.config.js",
+    "build": "cross-env NODE_ENV=development webpack --config config/webpack.config.js",
+    "devwatch": "cross-env NODE_ENV=development webpack --watch --config config/webpack.config.js",
+    "frontend": "cross-env NODE_ENV=development webpack --config config/webpack.config.js --watch",
+    "backend": "dotnet watch run",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
     "buildwatch": "cross-env NODE_ENV=development webpack --watch --config config/webpack.config.js",
-    "dev": "cross-env NODE_ENV=development npm run start:full",
-    "start:full": "concurrently -n FRONTEND,BACKEND -c green,blue \"npm run buildwatch\" \"dotnet watch run\"",
-    "publish": "npm run buildprod && dotnet publish -c Release",
-    "bsync": "concurrently -n FRONTEND -c green \"npm run buildwatch\""
+    "buildall": "cross-env NODE_ENV=production webpack --config config/webpack.config.js && dotnet publish -c Release -o ./bin/Release/net8.0/publish",
+    "buildprod": "cross-env NODE_ENV=production webpack --config config/webpack.config.js",
+    "publish": "dotnet publish -c Release -o ./bin/Release/net8.0/publish",
+    "dev": "webpack serve --config config/webpack.config.js --env development"
   },
   "author": "",
   "license": "ISC",
@@ -30,12 +34,13 @@
     "postcss": "^8.5.3",
     "postcss-loader": "^8.1.1",
     "raw-loader": "^4.0.2",
-    "speed-measure-webpack-plugin": "^1.5.0",
+    "sass": "^1.86.0",
+    "sass-glob-importer": "^1.0.1",
+    "sass-loader": "^16.0.5",
     "style-loader": "^4.0.0",
     "tailwindcss": "^4.1.5",
     "webpack": "^5.98.0",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.1",
-    "webpackbar": "^7.0.0"
+    "webpack-dev-server": "^5.2.1"
   }
 }
