@@ -1,8 +1,39 @@
 .btn {
-    color: white;
-    background-color: blue;
+    @apply inline-flex text-base leading-normal bg-primary justify-center text-center text-white no-underline px-5 py-3 cursor-pointer items-center border border-transparent rounded-sm;
+
+    {
+        @apply bg-primary-dark border-white;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        @apply bg-primary-dark border-white;
+    }
+
+    &:active {
+        @apply transition ease-in-out duration-150;
+    }
+
+    /* replace this class with all__disabled? all-disabled? globally when ready.*/
+    &:disabled,
+    &.is--disabled {
+        @apply bg-disabled text-white no-underline pointer-events-none border-gray-200;
+    }
+
+    &--full {
+        @apply w-full justify-center;
+
+    }
+
+    &--sm {
+        @apply px-4;
+        padding-top: 4.5px;
+        padding-bottom: 4.5px;
+    }
+
 }
 
 body {
-    @apply bg-gray-200;
+    @apply bg-red-500;
 }

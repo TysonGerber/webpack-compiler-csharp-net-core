@@ -2,11 +2,16 @@
 # .NET Stuff
 #############
 
+# Ignore .vs folder (Visual Studio user-specific settings)
+.vs/
+
 # Build output
 bin/
 obj/
-*.user
 *.suo
+*.user
+*.userosscache
+*.sln.docstates
 
 # Publish output
 *.publish.xml
@@ -34,6 +39,7 @@ secrets.json
 *.opensdf
 *.cache
 *.dbmdl
+*.vs
 
 #########################
 # ASP.NET Core Static Content
@@ -44,6 +50,8 @@ wwwroot/assets/
 
 # If Webpack outputs to /dist
 dist/
+build/
+node_modules/
 
 #####################
 # Node & NPM
@@ -76,6 +84,10 @@ package-lock.json
 *.log
 *.tmp
 *.bak
+*.db
+*.obj
+*.bin
+*.cache
 
 ###################
 # System files

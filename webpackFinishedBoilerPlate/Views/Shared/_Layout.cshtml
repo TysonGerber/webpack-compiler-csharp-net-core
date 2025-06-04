@@ -22,7 +22,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Webpack5BoilerPlate</a>
+                @* <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Webpack5BoilerPlate</a> *@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -47,10 +47,8 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Webpack5BoilerPlate - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>;
+       
+    </footer>
     <script src="@Url.Content("~/js/main.min.js")"></script>
     @* <script asp-src="~/js/main.min.js" asp-append-version="true"></script> *@
     @await RenderSectionAsync("Scripts", required: false)

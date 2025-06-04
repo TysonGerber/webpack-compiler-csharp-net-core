@@ -1,4 +1,5 @@
 ﻿const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
 
 module.exports = {
     content: [
@@ -8,27 +9,37 @@ module.exports = {
         './src/markup/**/*.hbs',
         './src/styles/**/*.css',
     ],
-    safelist: [
-        'bg-green-500',
-        'text-white',
-        'hover:bg-green-600',
-    ],
+    safelist: ['bg-green-500', 'text-white', 'hover:bg-green-600'],
     theme: {
         extend: {
             colors: {
-                brand: {
-                    light: '#ccff99',
-                    DEFAULT: '#39ff14',
-                    dark: '#00cc00',
+                ...colors, // 🧠 INCLUDE ALL Tailwind default colors first
+                'inherit-color': 'inherit',
+                transparent: 'transparent',
+                current: 'currentColor',
+                brand: { // Revvity Yellow
+                    light: '#fff47a',
+                    DEFAULT: '#ffeb0f',
+                    dark: '#a89700',
                 },
-                primary: {
-                    light: '#d2f4ff',
-                    DEFAULT: '#00ccff',
-                    dark: '#0088cc',
+                primary: { // Horizon Blue & Shades
+                    light: '#e8f0f4',
+                    DEFAULT: '#196b90',
+                    dark: '#124d68',
+                },
+                secondary: { // Horizon Plum & Shades
+                    light: '#eee7ec',
+                    DEFAULT: '#5d0f43',
+                    dark: '#46062f',
+                },
+                tertiary: {  // Horizon Green & Shades
+                    light: '#e5f0ef',
+                    DEFAULT: '#006e63',
+                    dark: '#004f42',
                 },
                 white: '#ffffff',
                 gray: {
-                    200: '#f6f6f6',
+                    200: '#f6f6f6', // Your custom shade overrides default
                     300: '#ddddde',
                     400: '#bbbdbf',
                     500: '#989a9c',
@@ -40,22 +51,29 @@ module.exports = {
                 black: {
                     DEFAULT: '#000000',
                 },
+                // Status Colors
                 disabled: '#ddddde',
                 error: {
-                    light: '#ffe5e5',
-                    DEFAULT: '#e60000',
-                    dark: '#990000',
+                    light: '#fef0f0',
+                    DEFAULT: '#920808',
+                    dark: '#620505',
                 },
                 success: {
-                    light: '#e6ffe6',
-                    DEFAULT: '#28a745',
-                    dark: '#1c7c2d',
+                    light: '#f7fff4',
+                    DEFAULT: '#217d00',
+                    dark: '#185b00',
                 },
                 warning: {
-                    light: '#fff6e0',
-                    DEFAULT: '#ffc107',
-                    dark: '#cc9a00',
+                    light: '#fff9ee',
+                    DEFAULT: '#ffad00',
+                    dark: '#dd9600',
                 },
+                // Infographics Colors
+                turquoise: '#00a499',
+                orange: '#e87722',
+                gold: '#8d6b0f',
+                beige: '#866f69',
+                'light-plum': '#723a5f',
             },
             fontFamily: {
                 sans: ['Lato', ...defaultTheme.fontFamily.sans],

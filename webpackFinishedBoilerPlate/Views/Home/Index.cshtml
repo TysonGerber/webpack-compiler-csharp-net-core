@@ -1,16 +1,149 @@
-﻿
-@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<div class="bg-white">
+    <button class="btn">Horizon Button</button>
+    <header class="absolute inset-x-0 top-0 z-50">
+    </header>
 
-<div class="text-center">
-    <div class="bg-green-500 text-white p-4 text-center">
-        ✅ Tailwind is working!
+    <div class="relative isolate px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl py-20">
+            <div class="text-center">
+                <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">Webpack Compiler for </br> .Net Core Projects</h1>
+                <p class="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">Created as a side project to test Tailwind V4</p>
+            </div>
+        </div>
+        <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]" aria-hidden="true">
+            <div class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-288.75" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+        </div>
     </div>
-    <h1 class="display-4">Welcome to just checking Webpack page!
-    </h1>
-    <h2 class="text-3xl font-bold underline">
-       Added this to test tailwind
-    </h2>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <! --  Card section Start-->
+    <div class="bg-white py-24 sm:py-32">
+        <div class="mx-auto max-w-4xl px-6 max-lg:text-center lg:max-w-7xl lg:px-8">
+            <h2 class="text-4xl font-semibold tracking-tight text-balance text-gray-950">Languages, Tools, and Frameworks used</h2>
+            <p class="mt-6 max-w-2xl text-lg font-medium text-pretty text-gray-600 max-lg:mx-auto sm:text-xl/8">Look to see the different tools and versions below</p>
+        </div>
+        <div class="relative pt-16 sm:pt-24">
+            <div class="absolute inset-x-0 top-48 bottom-0 bg-[radial-gradient(circle_at_center_center,#7775D6,#592E71,#030712_70%)] lg:bg-[radial-gradient(circle_at_center_150%,#7775D6,#592E71,#030712_70%)]"></div>
+            <div class="relative mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+                <div class="grid grid-cols-1 gap-10 lg:grid-cols-2">
+                    <div class="-m-2 grid grid-cols-1 gap-6 md:grid-cols-2 rounded-4xl shadow-[inset_0_0_2px_1px_#ffffff4d] ring-1 ring-black/5 max-lg:mx-auto max-lg:w-full max-lg:max-w-4xl">
+
+                        <!-- Languages -->
+                        <div class="grid grid-cols-1 rounded-4xl p-2 shadow-md shadow-black/5">
+                            <div class="rounded-3xl bg-white p-10 pb-9 shadow-2xl ring-1 ring-black/5">
+                                <h2 class="text-sm font-semibold text-indigo-600">Languages</h2>
+                                <div class="mt-6 space-y-2 text-gray-950 text-lg font-medium">
+                                    <div>C#</div>
+                                    <div>Razor (CSHTML)</div>
+                                    <div>HTML</div>
+                                    <div>CSS</div>
+                                    <div>JavaScript</div>
+                                    <div>JSON</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Frameworks & Tools -->
+                        <div class="grid grid-cols-1 rounded-4xl p-2 shadow-md shadow-black/5">
+                            <div class="rounded-3xl bg-white p-10 pb-9 shadow-2xl ring-1 ring-black/5">
+                                <h2 class="text-sm font-semibold text-indigo-600">Frameworks & Tools</h2>
+                                <div class="mt-6 space-y-2 text-gray-950 text-lg font-medium">
+                                    <div>ASP.NET Core</div>
+                                    <div>Tailwind CSS</div>
+                                    <div>Webpack</div>
+                                    <div>PostCSS</div>
+                                    <div>BrowserSync</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="flex justify-between py-16 opacity-60 max-sm:mx-auto max-sm:max-w-md max-sm:flex-wrap max-sm:justify-evenly max-sm:gap-x-4 max-sm:gap-y-4 sm:py-24">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <! -- Card Section End -->
+
+    <! --  README section Start-->
+        <div class="px-6 py-32 lg:px-8">
+            <div class="mx-auto max-w-3xl text-base/7">
+                <p class="text-base font-semibold text-indigo-600">Project</p>
+                <h1 class="mt-2 text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">webpack-compiler-csharp-net-core</h1>
+                <p class="mt-6 text-xl">🔧 A boilerplate project demonstrating how to integrate Webpack with ASP.NET Core (.NET 8) using modern JavaScript tooling powered by pnpm.</p>
+
+                <h2 class="mt-10 text-3xl font-semibold text-gray-900">🚀 Features</h2>
+                <ul class="mt-4 list-disc list-inside">
+                    <li>Webpack + ASP.NET Core (.NET 8)</li>
+                    <li>Hot Module Replacement (HMR)</li>
+                    <li>Production & development builds</li>
+                    <li>Modern JS tooling via pnpm</li>
+                </ul>
+
+                <h2 class="mt-10 text-3xl font-semibold text-gray-900">📦 Prerequisites</h2>
+                <p class="mt-2">Ensure you have these installed:</p>
+                <ul class="mt-2 list-disc list-inside">
+                    <li>.NET 8 SDK</li>
+                    <li>Node.js (LTS)</li>
+                    <li>pnpm</li>
+                    <li>Visual Studio 2022 or VS Code</li>
+                </ul>
+                <p class="mt-4">Install pnpm globally (if needed):</p>
+                <pre class="bg-gray-100 p-2 rounded text-sm text-indigo-600"><code>npm install -g pnpm</code></pre>
+
+                <h2 class="mt-10 text-3xl font-semibold text-gray-900">🛠️ Installation</h2>
+                <p class="mt-2">Clone the Repository:</p>
+                <pre class="bg-gray-100 p-2 rounded text-sm text-indigo-600"><code>git clone https://github.com/TysonGerber/webpack-compiler-csharp-net-core.git
+cd webpack-compiler-csharp-net-core</code></pre>
+                <p class="mt-4">Restore .NET Dependencies:</p>
+                <pre class="bg-gray-100 p-2 rounded text-sm text-indigo-600"><code>dotnet restore</code></pre>
+                <p class="mt-4">Install JavaScript Dependencies with pnpm:</p>
+                <pre class="bg-gray-100 p-2 rounded text-sm text-indigo-600"><code>cd webpackFinishedBoilerPlate
+pnpm install</code></pre>
+
+                <h2 class="mt-10 text-3xl font-semibold text-gray-900">🔧 Development Workflow</h2>
+                <p class="mt-2 font-semibold">1. Start Webpack Dev Server (with HMR):</p>
+                <pre class="bg-gray-100 p-2 rounded text-sm text-indigo-600"><code>pnpm start</code></pre>
+                <p class="mt-4 font-semibold">2. Run the ASP.NET Core Backend:</p>
+                <pre class="bg-gray-100 p-2 rounded text-sm text-indigo-600"><code>dotnet run</code></pre>
+                <p class="mt-2">Then visit: <a href="https://localhost:5001" class="text-blue-500 underline">https://localhost:5001</a></p>
+
+                <h2 class="mt-10 text-3xl font-semibold text-gray-900">🏗️ Build for Production</h2>
+                <p class="mt-2 font-semibold">Bundle frontend assets:</p>
+                <pre class="bg-gray-100 p-2 rounded text-sm text-indigo-600"><code>pnpm build</code></pre>
+                <p class="mt-4 font-semibold">Publish .NET App:</p>
+                <pre class="bg-gray-100 p-2 rounded text-sm text-indigo-600"><code>dotnet publish -c Release</code></pre>
+                <p class="mt-2">This creates a production-ready version of your site in the <code>publish/</code> directory.</p>
+
+                <h2 class="mt-10 text-3xl font-semibold text-gray-900">📁 Folder Structure</h2>
+                <pre class="bg-gray-100 p-4 rounded text-sm text-gray-800"><code>webpack-compiler-csharp-net-core/
+├── webpackFinishedBoilerPlate/   # JS + Webpack
+│   ├── package.json
+│   ├── webpack.config.js
+│   └── src/
+├── Controllers/                  # ASP.NET MVC controllers
+├── Views/                        # Razor views
+├── wwwroot/                      # Static files from Webpack
+├── *.csproj
+└── README.md</code></pre>
+
+                <h2 class="mt-10 text-3xl font-semibold text-gray-900">🧪 Scripts (via pnpm)</h2>
+                <pre class="bg-gray-100 p-2 rounded text-sm text-indigo-600"><code>pnpm start     # Start Webpack Dev Server with HMR
+pnpm build     # Build frontend assets for production</code></pre>
+
+                <h2 class="mt-10 text-3xl font-semibold text-gray-900">🤝 Contributing</h2>
+                <p class="mt-2">Feel free to fork, improve, and PR. Contributions welcome!</p>
+
+                <h2 class="mt-10 text-3xl font-semibold text-gray-900">📄 License</h2>
+                <p class="mt-2">MIT</p>
+
+                <p class="mt-8">Let me know if you'd like this README.md saved into your repo directly or tailored further (e.g., add screenshots, CI instructions, or configuration details). 🔨🤖</p>
+            </div>
+        </div>
+
+    <! -- README Section End -->
+
+
 </div>
