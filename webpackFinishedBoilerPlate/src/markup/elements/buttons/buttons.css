@@ -1,39 +1,38 @@
-.btn {
-    @apply inline-flex text-base leading-normal bg-primary justify-center text-center text-white no-underline px-5 py-3 cursor-pointer items-center border border-transparent rounded-sm;
+/*meant for styling base HTML elements: h1, h2, p, a, input, ul, ol, li*/
 
-    {
-        @apply bg-primary-dark border-white;
+/*Why use @layer?
+Because Tailwind needs to know where to inject your custom CSS in the correct order, so it plays nice with the rest of the utility system — especially when using JIT mode or purging unused styles.*/
+
+@layer base {
+    button {
+        font-family: var(--font-sans);
+        font-weight: 500;
+        cursor: pointer;
+        border-radius: var(--radius-md);
+        transition: background-color 0.2s ease;
     }
-
-    &:hover,
-    &:focus,
-    &:active {
-        @apply bg-primary-dark border-white;
-    }
-
-    &:active {
-        @apply transition ease-in-out duration-150;
-    }
-
-    /* replace this class with all__disabled? all-disabled? globally when ready.*/
-    &:disabled,
-    &.is--disabled {
-        @apply bg-disabled text-white no-underline pointer-events-none border-gray-200;
-    }
-
-    &--full {
-        @apply w-full justify-center;
-
-    }
-
-    &--sm {
-        @apply px-4;
-        padding-top: 4.5px;
-        padding-bottom: 4.5px;
-    }
-
 }
 
-body {
-    @apply bg-red-500;
+/* https://tailwindcss.com/docs/functions-and-directives#theme-directive */
+@theme {
+    --color-btn-primary-bg: var(--color-blue-500);
+    --color-btn-primary-hover: var(--color-blue-600);
+    --radius-md: 0.375rem;
+    --font-sans: "Inter", sans-serif;
+}
+
+@layer components {
+    .btn {
+        @apply px-4 py-2 text-white;
+        font-family: var(--font-sans);
+        font-weight: 500;
+        cursor: pointer;
+        border-radius: var(--radius-md);
+        transition: background-color 0.2s ease;
+        background-color: var(--color-btn-primary-bg);
+    }
+
+        .btn:hover {
+            background-color: var(--color-btn-primary-hover);
+        }
 }

@@ -29,40 +29,40 @@ if (isProduction) {
         })
     );
 } else {
-    //plugins.push(
-    //    new BrowserSyncPlugin(
-    //        {
-    //            proxy: 'https://localhost:7238',
-    //            host: 'webpackcompiler.local',
-    //            port: 5026,
-    //            https: {
-    //                key: path.resolve(__dirname, '../certs/webpackcompiler.local.key'),
-    //                cert: path.resolve(__dirname, '../certs/webpackcompiler.local.crt')
-    //            },
-    //            startPath: '/',
-    //            open: 'external',
-    //            files: [
-    //                path.resolve(__dirname, '../Views/**/*.cshtml'),
-    //                path.resolve(__dirname, '../wwwroot/js/**/*.js'),
-    //                path.resolve(__dirname, '../wwwroot/css/**/*.css')
-    //            ],
-    //            reloadDelay: 500
-    //        },
-    //        {
-    //            injectCss: true,
-    //            reload: false,
-    //            callbacks: {
-    //                ready: (err, bs) => {
-    //                    console.log('✅ BrowserSync watching .cshtml...');
-    //                    bs.watch('../Views/**/*.cshtml').on('change', file => {
-    //                        console.log(`🔁 Razor change detected: ${file}`);
-    //                        bs.reload();
-    //                    });
-    //                }
-    //            }
-    //        }
-    //    )
-    //);
+    plugins.push(
+        //new BrowserSyncPlugin(
+        //    {
+        //        proxy: 'https://localhost:7238',
+        //        host: 'webpackcompiler.local',
+        //        port: 5026,
+        //        https: {
+        //            key: path.resolve(__dirname, '../certs/webpackcompiler.local.key'),
+        //            cert: path.resolve(__dirname, '../certs/webpackcompiler.local.crt')
+        //        },
+        //        startPath: '/',
+        //        open: 'external',
+        //        files: [
+        //            path.resolve(__dirname, '../Views/**/*.cshtml'),
+        //            path.resolve(__dirname, '../wwwroot/js/**/*.js'),
+        //            path.resolve(__dirname, '../wwwroot/css/**/*.css')
+        //        ],
+        //        reloadDelay: 500
+        //    },
+        //    {
+        //        injectCss: true,
+        //        reload: false,
+        //        callbacks: {
+        //            ready: (err, bs) => {
+        //                console.log('✅ BrowserSync watching .cshtml...');
+        //                bs.watch('../Views/**/*.cshtml').on('change', file => {
+        //                    console.log(`🔁 Razor change detected: ${file}`);
+        //                    bs.reload();
+        //                });
+        //            }
+        //        }
+        //    }
+        //)
+    );
 }
 
 // ✅ Core Config
